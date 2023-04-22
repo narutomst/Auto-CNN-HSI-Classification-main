@@ -1,0 +1,25 @@
+Sun 15 Aug 2021 14:11:39 test_logging.py INFO This is a info.
+Sun 15 Aug 2021 14:11:39 test_logging.py WARNING This is a warning.
+Sun 15 Aug 2021 14:11:39 test_logging.py INFO param size = 2.163108MB
+Sun 15 Aug 2021 14:11:39 test_logging.py INFO epoch 001 lr 1.000000e-03
+Sun 15 Aug 2021 14:11:39 test_logging.py INFO Epoch 001: train_loss = 1.844154, train_acc = 0.025251, val_loss = 1.078944, val_acc = 0.001369, time = 0.000000
+Sun 15 Aug 2021 14:11:39 test_logging.py INFO epoch 002 lr 1.000000e-03
+Sun 15 Aug 2021 14:11:39 test_logging.py INFO Epoch 002: train_loss = 0.985653, train_acc = 0.141901, val_loss = 0.928809, val_acc = 0.197393, time = 0.000000
+Sun 15 Aug 2021 14:11:39 test_logging.py INFO epoch 003 lr 1.000000e-03
+Sun 15 Aug 2021 14:11:39 test_logging.py INFO Epoch 003: train_loss = 0.484976, train_acc = 0.236072, val_loss = 0.403352, val_acc = 0.284397, time = 0.000000
+Sun 15 Aug 2021 14:11:39 test_logging.py INFO epoch 004 lr 1.000000e-03
+Sun 15 Aug 2021 14:11:39 test_logging.py INFO Epoch 004: train_loss = 0.435897, train_acc = 0.365504, val_loss = 0.339060, val_acc = 0.354588, time = 0.000000
+Sun 15 Aug 2021 14:11:39 test_logging.py INFO epoch 005 lr 1.000000e-03
+Sun 15 Aug 2021 14:11:39 test_logging.py INFO Epoch 005: train_loss = 0.208574, train_acc = 0.493236, val_loss = 0.338559, val_acc = 0.409942, time = 0.000998
+Sun 15 Aug 2021 14:11:39 test_logging.py INFO epoch 006 lr 1.000000e-03
+Sun 15 Aug 2021 14:11:39 test_logging.py INFO Epoch 006: train_loss = 0.169199, train_acc = 0.587340, val_loss = 0.219081, val_acc = 0.553054, time = 0.000000
+Sun 15 Aug 2021 14:11:39 test_logging.py INFO epoch 007 lr 1.000000e-03
+Sun 15 Aug 2021 14:11:39 test_logging.py INFO Epoch 007: train_loss = 0.197795, train_acc = 0.601565, val_loss = 0.199370, val_acc = 0.690636, time = 0.000000
+Sun 15 Aug 2021 14:11:39 test_logging.py INFO epoch 008 lr 1.000000e-03
+Sun 15 Aug 2021 14:11:39 test_logging.py INFO Epoch 008: train_loss = 0.208224, train_acc = 0.716735, val_loss = 0.142991, val_acc = 0.793826, time = 0.000000
+Sun 15 Aug 2021 14:11:39 test_logging.py INFO epoch 009 lr 1.000000e-03
+Sun 15 Aug 2021 14:11:39 test_logging.py INFO Epoch 009: train_loss = 0.129359, train_acc = 0.857258, val_loss = 0.120953, val_acc = 0.864515, time = 0.000000
+Sun 15 Aug 2021 14:11:39 test_logging.py INFO epoch 010 lr 1.000000e-03
+Sun 15 Aug 2021 14:11:39 test_logging.py INFO Epoch 010: train_loss = 0.109684, train_acc = 0.901139, val_loss = 0.131075, val_acc = 0.978057, time = 0.000000
+Sun 15 Aug 2021 14:11:39 test_logging.py INFO Searched Neural Architecture:
+Sun 15 Aug 2021 14:11:39 test_logging.py INFO HSI = 
