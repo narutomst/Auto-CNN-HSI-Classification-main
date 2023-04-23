@@ -243,7 +243,7 @@ if __name__ == '__main__':
 
     # 将分类结果按列保存到txt中
     now = time.strftime("%Y-%m-%d %H:%M:%S ", time.localtime(time.time()))
-    resultStr = '# OA, AA, Kappa, TPR  ' + now + image_file + '\n'
+    resultStr = '#  OA,     AA,   Kappa,  TPR  ' + now + image_file
 
     # 不同数据集的分类结果保存到不同的文件中，fname
     dir_name, base_name = osp.split(image_file)
@@ -257,11 +257,11 @@ if __name__ == '__main__':
     # 数据的标题只写一次，只要不是空文件，追加的时候就不用再写标题了
     # 数据文件fname不存在的话，open()就会自动创建fname文件
     with open(fname, mode='a', encoding='utf-8') as f:  # 'utf-8'可确保中文不乱码;如果fname不存在，则会创建fname文件
-        if os.path.getsize(fname) == 0:
-            header = resultStr.rstrip('\n')
-        else:
-            header = ''
-        np.savetxt(f, np.column_stack(a), fmt='%.4f', delimiter=' ', newline='\n', header=header,
+        # if os.path.getsize(fname) == 0:
+        #     header = resultStr.rstrip('\n')
+        # else:
+        #     header = ''
+        np.savetxt(f, np.column_stack(a), fmt='%.4f', delimiter=' ', newline='\n', header=resultStr,
                    footer='', comments='', encoding=None)
         f.close()
 
