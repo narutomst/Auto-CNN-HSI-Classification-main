@@ -214,8 +214,8 @@ def cal_results(matrix):
     shape = np.shape(matrix)
     number = 0
     sum = 0
-    # AA = np.zeros([shape[0]], dtype=np.float)
-    TPR: ndarray = np.zeros([shape[0]], dtype=np.float)
+    # AA = np.zeros([shape[0]], dtype=float)
+    TPR: ndarray = np.zeros([shape[0]], dtype=float)
     for i in range(shape[0]):
         number += matrix[i, i]
         TPR[i] = matrix[i, i] / np.sum(matrix[i, :])
