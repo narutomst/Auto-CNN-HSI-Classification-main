@@ -75,17 +75,17 @@ logging.basicConfig(stream=sys.stdout, level=logging.INFO, format=log_format, da
 # 消息输出指定为：在标准输出设备sys.stdout上（默认为sys.stderr），
 # 消息级别指定为：INFO及以上(Handler及其子类的默认消息级别level=NOTSET)，
 # 请注意，根记录器(root Logger)的默认级别为 `WARNING`消息格式为log_format
-# 日期格式datefmt指定为与 time.strftime() 一致。：https://docs.python.org/zh-cn/3/library/time.html#time.strftime
+# 日期格式datefmt指定为与 time.strftime()一致。：https://docs.python.org/zh-cn/3/library/time.html#time.strftime
 # %m：十进制数 [01,12] 表示的月。
 # %d：十进制数 [01,31] 表示的月中日。
 # %I：十进制数 [01,12] 表示的小时（12小时制）。
 # %M：十进制数 [00,59] 表示的分钟。
 # %S：十进制数 [00,61] 表示的秒。
 # %p：本地化的 AM 或 PM 。
-# 日期时间的输出效果  08/10 11:12:29 PM
+# '%m/%d %I:%M:%S %p'日期时间的输出效果为 08/10 11:12:29 PM
 
 # 也可以选择基于basicConfig()函数，首先为第二路日志做相关设置，具体语法为：
-# logging.basicConfig(filename='./result/log.txt', level=logging.INFO, format=log_format, datefmt='%m/%d %I:%M:%S %p')
+# logging.basicConfig(filename='./result/log.txt', level=logging.INFO, format=log_format, datefmt='%Y-%m-%d %H:%M:%S')
 # 若是这样，后面就得通过创建StreamHandler处理器来完成第一路输出的任务了。因为在basicConfig()中，stream参数和filename参数
 # 不能同时出现，否则将会报错
 
