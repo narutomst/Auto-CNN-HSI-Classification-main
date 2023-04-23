@@ -1,9 +1,9 @@
+import os
 import argparse
 import logging
 import random
 import sys
 import time  # 判断time模块是否导入成功，'time' in sys.modules.keys()：True，说明该模块导入成功
-
 import numpy as np
 import torch  # 运行前，'torch' in sys.modules.keys()：False; 运行后，'torch' in sys.modules.keys()：True
 import torch.backends.cudnn as cudnn
@@ -141,6 +141,25 @@ logging.getLogger().addHandler(fh)
 # label_file = r'C:\Matlab练习\duogun\Pavia_gt.mat'
 image_file = r'C:\Matlab练习\duogun\PaviaU.mat'
 label_file = r'C:\Matlab练习\duogun\PaviaU_gt.mat'
+disk_name = ['C:\\', 'D:\\', 'E:\\', 'F:\\', 'G:\\']  # 盘符
+intermediate_path = r'Matlab练习\duogun'  # 中间路径名称
+mat_file_name = ['Pavia', 'PaviaU']
+# 1.搜索哪个盘中有'Matlab练习\duogun'这个路径
+for item in disk_name:
+    test_path = os.path.join(item, intermediate_path)
+    if os.path.exists(test_path):   #
+        for fname in mat_file_name:
+            full_path = os.path.join(test_path, fname + '.mat')   # 2.确认该文件夹中有所指定的mat数据文件
+            if os.path.isfile(full_path):
+                image_file = full_path
+            full_path2 = os.path.join(test_path, fname + '_gt.mat')
+            if os.path.isfile(full_path2):
+                label_file = full_path2
+                break
+    else:
+        continue
+    break
+
 # 在本py文件内的使用：定义跨模块全局变量，赋值
 glv.set_value('image_file', image_file)
 glv.set_value('label_file', label_file)
