@@ -40,7 +40,7 @@ parser.add_argument('--grad_clip', type=float, default=5, help='gradient clippin
 args = parser.parse_args()
 
 log_format = '%(asctime)s %(message)s'
-logging.basicConfig(stream=sys.stdout, level=logging.INFO, format=log_format, datefmt='%m/%d %I:%M:%S %p')
+logging.basicConfig(stream=sys.stdout, level=logging.INFO, format=log_format, datefmt='%Y-%m-%d %H:%M:%S')  # 原版是'%m/%d %I:%M:%S %p'
 fh = logging.FileHandler('./result/log.txt')
 fh.setFormatter(logging.Formatter(log_format))
 logging.getLogger().addHandler(fh)
