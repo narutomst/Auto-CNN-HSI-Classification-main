@@ -1,6 +1,6 @@
 import torch
 import numpy as np
-import torch.nn as nn
+# import torch.nn as nn
 
 
 def _concat(xs):
@@ -36,6 +36,7 @@ class Architect(object):
         # tensor([ 0.0580,  0.0978,  0.0657,  ..., -0.0783, -0.0189,  0.0881], device='cuda:0')
         # _concat(self.model.parameters()).data.shape: torch.Size([157817])
         # theta的含义是什么？
+
         try:
             moment = _concat(network_optimizer.state[v]['momentum_buffer'] for v in self.model.parameters()).mul_(
                 self.network_momentum)
@@ -55,7 +56,8 @@ class Architect(object):
             #     weight_decay: 0.0003
             # )
         except:
-            moment = torch.zeros_like(theta)    # moment:{tensor}, moment.shape: torch.Size([157817])
+            moment = torch.zeros_like(theta)  # moment:{tensor}, moment.shape: torch.Size([157817])
+
         dtheta = _concat(torch.autograd.grad(loss, self.model.parameters())).data + self.network_weight_decay * theta
         # torch.autograd.grad(outputs, inputs, grad_outputs=None, retain_graph=None, create_graph=False, only_inputs=True, allow_unused=False)
         # 计算并返回输出outputs相对于输入inputs的梯度之和。这里的outputs的requires_grad属性必须为True
@@ -107,7 +109,7 @@ class Architect(object):
             # ig.data: {tensor}, v.shape: torch.Size([14,8]), dtype: torch.float32
             # 根据以上各个参数形状特点以及add()函数的用法，修改为如下
             g.data.sub_(ig.data, alpha=eta)
-			device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")	
+            device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
         for v, g in zip(self.model.arch_parameters(), dalpha):
             if v.grad is None:
                 v.grad = g.data.to(device)
@@ -147,7 +149,7 @@ class Architect(object):
             # R: tensor(0.0025, device='cuda:0')
             # v: {tensor}, .shape: torch.Size([32, 102, 1, 1]), .dtype: torch.float32
             # 根据以上各个参数形状特点以及sub()函数的用法，修改为如下
-            p.data.sub_(v, alpha=2*R)
+            p.data.sub_(v, alpha=2 * R)
         loss = self.model._loss(input, target)
         grads_n = torch.autograd.grad(loss, self.model.arch_parameters())
 
@@ -159,4 +161,4 @@ class Architect(object):
             # 根据以上各个参数形状特点以及add()函数的用法，修改为如下
             p.data.add_(v, alpha=R)
         return [(x - y).div_(2 * R) for x, y in zip(grads_p, grads_n)]
-            # div()是绝对不会出错的，因为只需要一个位置参数，再不需要其他参数
+        # div()是绝对不会出错的，因为只需要一个位置参数，再不需要其他参数
