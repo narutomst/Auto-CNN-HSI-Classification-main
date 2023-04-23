@@ -12,8 +12,8 @@ from tensorflow.python.framework import dtypes
 import base
 import scipy.io as sio
 import numpy as np
-from torch import dtype
-import torch
+
+
 # 定义了一个类DataSet(object)，
 # 定义了4个函数：load_data, one_hot_transform, read_data, 
 def load_data(image_file, label_file):
@@ -150,17 +150,17 @@ def read_data(image_file, label_file, train_nsamples=600, validation_nsamples=30
 
         for i in range(train_nsamples):
             train_image[i, :, :, :] = image[(not_zero_raw[shuffle_number[i]] - halfsize):(
-                        not_zero_raw[shuffle_number[i]] + halfsize + 1),
+                    not_zero_raw[shuffle_number[i]] + halfsize + 1),
                                       (not_zero_col[shuffle_number[i]] - halfsize):(
-                                                  not_zero_col[shuffle_number[i]] + halfsize + 1), :]
+                                              not_zero_col[shuffle_number[i]] + halfsize + 1), :]
             train_label[i, :] = one_hot_transform(label[not_zero_raw[shuffle_number[i]],
                                                         not_zero_col[shuffle_number[i]]], number_class)
 
         for i in range(validation_nsamples):
             validation_image[i, :, :, :] = image[(not_zero_raw[shuffle_number[i + train_nsamples]] - halfsize):(
-                        not_zero_raw[shuffle_number[i + train_nsamples]] + halfsize + 1),
+                    not_zero_raw[shuffle_number[i + train_nsamples]] + halfsize + 1),
                                            (not_zero_col[shuffle_number[i + train_nsamples]] - halfsize):(
-                                                       not_zero_col[shuffle_number[i + train_nsamples]] + halfsize + 1),
+                                                   not_zero_col[shuffle_number[i + train_nsamples]] + halfsize + 1),
                                            :]
             validation_label[i, :] = one_hot_transform(label[not_zero_raw[shuffle_number[i + train_nsamples]],
                                                              not_zero_col[shuffle_number[i + train_nsamples]]],
@@ -192,8 +192,8 @@ def read_data(image_file, label_file, train_nsamples=600, validation_nsamples=30
                                                                                                           batchnumber * times + i + train_nsamples + validation_nsamples]] + halfsize + 1),
                                          (not_zero_col[shuffle_number[
                                              batchnumber * times + i + train_nsamples + validation_nsamples]] - halfsize):(
-                                                     not_zero_col[shuffle_number[
-                                                         batchnumber * times + i + train_nsamples + validation_nsamples]] + halfsize + 1),
+                                                 not_zero_col[shuffle_number[
+                                                     batchnumber * times + i + train_nsamples + validation_nsamples]] + halfsize + 1),
                                          :]
                 test_label[i, :] = one_hot_transform(
                     label[not_zero_raw[shuffle_number[batchnumber * times + i + train_nsamples + validation_nsamples]],
@@ -216,8 +216,8 @@ def read_data(image_file, label_file, train_nsamples=600, validation_nsamples=30
                                                                                                           batchnumber * times + i + train_nsamples + validation_nsamples]] + halfsize + 1),
                                          (not_zero_col[shuffle_number[
                                              batchnumber * times + i + train_nsamples + validation_nsamples]] - halfsize):(
-                                                     not_zero_col[shuffle_number[
-                                                         batchnumber * times + i + train_nsamples + validation_nsamples]] + halfsize + 1),
+                                                 not_zero_col[shuffle_number[
+                                                     batchnumber * times + i + train_nsamples + validation_nsamples]] + halfsize + 1),
                                          :]
                 test_label[i, :] = one_hot_transform(
                     label[not_zero_raw[shuffle_number[batchnumber * times + i + train_nsamples + validation_nsamples]],
