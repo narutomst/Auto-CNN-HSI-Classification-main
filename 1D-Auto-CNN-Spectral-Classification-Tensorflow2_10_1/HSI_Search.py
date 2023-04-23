@@ -70,7 +70,7 @@ args = parser.parse_args()
 # 这其实是basicConfig()通过为根记录器（root Logger）创建并添加某个特定处理器来实现的
 # 只不过这不是为记录器对象Logger创建和添加处理器的标准做法
 log_format = '%(asctime)s %(message)s'
-logging.basicConfig(stream=sys.stdout, level=logging.INFO, format=log_format, datefmt='%m/%d %I:%M:%S %p')
+logging.basicConfig(stream=sys.stdout, level=logging.INFO, format=log_format, datefmt='%Y-%m-%d %H:%M:%S')  # '%m/%d %I:%M:%S %p'
 # 为根记录器创建StreamHandler处理器对象（并直接将其添加到根记录器），
 # 消息输出指定为：在标准输出设备sys.stdout上（默认为sys.stderr），
 # 消息级别指定为：INFO及以上(Handler及其子类的默认消息级别level=NOTSET)，
