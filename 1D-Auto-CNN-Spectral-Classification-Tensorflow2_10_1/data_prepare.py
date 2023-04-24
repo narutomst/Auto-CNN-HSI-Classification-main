@@ -137,9 +137,9 @@ def read_data(image_file, label_file, train_nsamples=600, validation_nsamples=30
     test_nsamples = number_samples - train_nsamples - validation_nsamples
 
     if istraining:
-        np.random.seed(rand_seed)
+        np.random.seed(rand_seed)   # 设定随机数种子，使得每次生成的随机数相同，以及与随机化有关的动作(比如np.random.shuffle)能复现。
 
-        shuffle_number = np.arange(number_samples)
+        shuffle_number = np.arange(number_samples)  # np.arange(5): [0 1 2 3 4], dtype:ndarray
         np.random.shuffle(shuffle_number)
 
         train_image = np.zeros([train_nsamples, windowsize, windowsize, shape[2]], dtype=np.float32)
