@@ -70,7 +70,7 @@ def main(genotype, seed):
     cudnn.enabled = True
     torch.cuda.manual_seed(args.seed)
 
-    model = NetworkHSI(args.init_channels, args.num_class, args.layers, genotype)   # model.py: 63
+    model = NetworkHSI(args.init_channels, args.num_class, args.layers, genotype)   # 定义在 model.py: line 64
     model = model.to(device)
     logging.info("param size = %fMB", utils.count_parameters_in_MB(model))
 
@@ -86,9 +86,9 @@ def main(genotype, seed):
 
         model.drop_path_prob = args.drop_path_prob * epoch / args.epochs
 
-        # training      tar:target  pre:predict
+        # training      tar:target  pre:predict。# train()定义在本页line 109
         train_acc, train_obj, tar, pre = train(data.train, model, criterion, optimizer)
-        # validation    tar_v:target_valid  pre_v:predictt_valid
+        # validation    tar_v:target_valid  pre_v:predictt_valid。# infer()定义在本页line 143
         valid_acc, valid_obj, tar_v, pre_v = infer(data.validation, model, criterion)
         scheduler.step()
         toc = time.time()
@@ -101,7 +101,7 @@ def main(genotype, seed):
             utils.save(model, './result/weights.pt')
 
     utils.load(model, './result/weights.pt')
-    matrix = test_model(model, shuffle_number, seed)
+    matrix = test_model(model, shuffle_number, seed)    # 定义在本页line 171
 
     return matrix
 
@@ -236,7 +236,7 @@ if __name__ == '__main__':
     # 整个语句的真正表达式为：
     # genotype = genotypes.HSI
     matrix = main(genotype=genotype, seed=np.random.randint(low=0, high=10000, size=1))
-    # mian()位于 line 49
+    # mian()定义位于 line 60
     # OA, AA_mean, Kappa, AA = cal_results(matrix)
     OA, AA, Kappa, TPR = cal_results(matrix)
     print(OA)

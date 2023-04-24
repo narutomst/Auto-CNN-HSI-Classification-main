@@ -184,18 +184,18 @@ def main(seed):
     # args.init_channels = data[0].images.shape[1]
     # global 字典变量赋值
     glv.set_value('num_bands', data[0].images.shape[1])  # (200, 102, 1, 1)
-    model = Network(args.init_channels, args.num_class, args.layers, criterion)  # model_search.py: line 63
+    model = Network(args.init_channels, args.num_class, args.layers, criterion)  #定义在 model_search.py: line 66
     model = model.cuda()
     logging.info("param size = %fMB", utils.count_parameters_in_MB(model))
 
     optimizer = torch.optim.Adam(model.parameters(), lr=args.learning_rate, weight_decay=args.weight_decay)
     scheduler = torch.optim.lr_scheduler.StepLR(optimizer, step_size=args.epochs // 5, gamma=0.25)
 
-    architect = Architect(model, args)
+    architect = Architect(model, args)  # 定义在architect.py line 18
 
     min_valid_obj = 100
 
-    genotype = model.genotype()  # model_search.py: line 142
+    genotype = model.genotype()  # 定义在 model_search.py: line 149
     # print('genotype = ', genotype) # y
     logging.info('genotype = %s', genotype)
 
@@ -205,10 +205,10 @@ def main(seed):
         lr = scheduler.get_last_lr()[0]
         logging.info('epoch %03d lr %e', epoch + 1, lr)
 
-        # training    tar:target  pre:predict
+        # training    tar:target  pre:predict。# train()定义在本页line 228
         train_acc, train_obj, tar, pre = train(data.train, data.validation, model, architect, criterion, optimizer, lr)
 
-        # validation   tar_v:target_valid  pre_v:predict_valid
+        # validation   tar_v:target_valid  pre_v:predict_valid。 # infer()定义在本页line 271
         valid_acc, valid_obj, tar_v, pre_v = infer(data.validation, model, criterion)
         scheduler.step()
         toc = time.time()
@@ -300,7 +300,7 @@ def infer(valid_data, model, criterion):
 
 
 if __name__ == '__main__':
-    genotype = main(seed=np.random.randint(low=0, high=10000, size=1))  # main(seed)定义在line 61
+    genotype = main(seed=np.random.randint(low=0, high=10000, size=1))  # main(seed)定义在line 169
     str1 = 'Searched Neural Architecture:'
     print(str1)
     print(genotype)
@@ -329,7 +329,9 @@ if __name__ == '__main__':
     _global_dict = {'image_file': image_file, 'label_file': label_file, 'num_bands': glv.get_value('num_bands')}
     new_line = prefix.strip('{') + str(_global_dict)
 
-    # 替换
+    # 替换global_variable.py中的line 10，
+    # _global_dict = {'image_file': 'D:\\Matlab练习\\duogun\\Pavia.mat',
+    #                 'label_file': 'D:\\Matlab练习\\duogun\\Pavia_gt.mat', 'num_bands': 102}
     filepath = 'global_variable.py'
     with open(filepath, mode='r', encoding='utf-8') as f:  # 'utf-8'可确保中文不乱码;如果fname不存在，则会创建fname文件
         lines = f.readlines()
