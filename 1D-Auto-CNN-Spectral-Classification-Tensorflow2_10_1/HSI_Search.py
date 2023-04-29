@@ -333,14 +333,16 @@ if __name__ == '__main__':
     # _global_dict = {'image_file': 'D:\\Matlab练习\\duogun\\Pavia.mat',
     #                 'label_file': 'D:\\Matlab练习\\duogun\\Pavia_gt.mat', 'num_bands': 102}
     filepath = 'global_variable.py'
-    with open(filepath, mode='r', encoding='utf-8') as f:  # 'utf-8'可确保中文不乱码;如果fname不存在，则会创建fname文件
-        lines = f.readlines()
+    f = open(filepath, mode='r', encoding='utf-8')  # 'utf-8'可确保中文不乱码;如果fname不存在，则会创建fname文件
+    lines = f.readlines()
 
-    with open(filepath, mode='w', encoding='utf-8') as ff:  # 此处只能是 w，以 w 模式打开文件时，文件内容全被清空
-        for line in lines:
-            if line.startswith(prefix):
-                line = new_line
-            ff.write(line)
+    f = open(filepath, mode='w', encoding='utf-8')  # 此处只能是 w，以 w 模式打开文件时，文件内容全被清空
+    for line in lines:
+        if line.startswith(prefix):
+            line = new_line
+        f.write(line)
+    f.close()
+
     # ————————————————
     # 修改指定行的方法参考了
     # 原文链接：https://blog.csdn.net/qq_36072270/article/details/103496152
