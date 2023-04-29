@@ -256,14 +256,14 @@ if __name__ == '__main__':
     # 使用f和np.savetxt()组合来保存数据，格式处理很方便
     # 数据的标题只写一次，只要不是空文件，追加的时候就不用再写标题了
     # 数据文件fname不存在的话，open()就会自动创建fname文件
-    with open(fname, mode='a', encoding='utf-8') as f:  # 'utf-8'可确保中文不乱码;如果fname不存在，则会创建fname文件
-        # if os.path.getsize(fname) == 0:
-        #     header = resultStr.rstrip('\n')
-        # else:
-        #     header = ''
-        np.savetxt(f, np.column_stack(a), fmt='%.4f', delimiter=' ', newline='\n', header=resultStr,
-                   footer='', comments='', encoding=None)
-        f.close()
+    f = open(fname, mode='a', encoding='utf-8')  # 'utf-8'可确保中文不乱码;如果fname不存在，则会创建fname文件
+    # if os.path.getsize(fname) == 0:
+    #     header = resultStr.rstrip('\n')
+    # else:
+    #     header = ''
+    np.savetxt(f, np.column_stack(a), fmt='%.4f', delimiter=' ', newline='\n', header=resultStr,
+               footer='', comments='', encoding=None)
+    f.close()
 
     # 单纯使用f.write()保存数据，格式处理上比较麻烦
     # b = ['%.4f ' % x for x in a]
