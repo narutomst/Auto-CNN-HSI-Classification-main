@@ -48,7 +48,7 @@ args.cuda = torch.cuda.is_available()
 args.manualSeed = random.randint(1, 10000)
 
 log_format = '%(asctime)s %(message)s'
-logging.basicConfig(stream=sys.stdout, level=logging.INFO, format=log_format, datefmt='%m/%d %I:%M:%S %p')
+logging.basicConfig(stream=sys.stdout, level=logging.INFO, format=log_format, datefmt='%Y-%m-%d %H:%M:%S')  # '%m/%d %I:%M:%S %p'
 fh = logging.FileHandler('./result/log_3D.txt')
 fh.setFormatter(logging.Formatter(log_format))
 logging.getLogger().addHandler(fh)
@@ -56,6 +56,25 @@ logging.getLogger().addHandler(fh)
 # read data
 image_file = r'C:\Matlab练习\duogun\PaviaU.mat'
 label_file = r'C:\Matlab练习\duogun\PaviaU_gt.mat'
+disk_name = ['C:\\', 'D:\\', 'E:\\', 'F:\\', 'G:\\']  # 盘符
+intermediate_path = r'Matlab练习\duogun'  # 中间路径名称
+mat_file_name = ['Pavia', 'PaviaU']
+# 1.搜索哪个盘中有'Matlab练习\duogun'这个路径
+for item in disk_name:
+    test_path = os.path.join(item, intermediate_path)
+    if os.path.exists(test_path):   #
+        for fname in mat_file_name:
+            full_path = os.path.join(test_path, fname + '.mat')   # 2.确认该文件夹中有所指定的mat数据文件
+            if os.path.isfile(full_path):
+                image_file = full_path
+            full_path2 = os.path.join(test_path, fname + '_gt.mat')
+            if os.path.isfile(full_path2):
+                label_file = full_path2
+                break
+    else:
+        continue
+    break
+
 # 在本py文件内的使用：定义跨模块全局变量，赋值
 glv.set_value('image_file', image_file)
 glv.set_value('label_file', label_file)
@@ -263,9 +282,9 @@ if __name__ == '__main__':
     now = time.strftime("%Y-%m-%d %H:%M:%S ", time.localtime(time.time()))
     resultStr = '\n# ' + now + str1 + '\n' + 'HSI = ' + str(genotype) + '\n'
 
-    with open('genotypes.py', 'a') as f:
-        f.write(resultStr)
-        f.close()
+    f = open('genotypes.py', 'a')
+    f.write(resultStr)
+    f.close()
 
     # 将本次运行中所使用的全局变量: image_file, label_file, num_bands
     # 写入到 global_variable.py 的初始化函数 _init()的全局变量字典_global_dict = {}当中去
@@ -279,14 +298,15 @@ if __name__ == '__main__':
 
     # 替换
     filepath = 'global_variable.py'
-    with open(filepath, mode='r', encoding='utf-8') as f:  # 'utf-8'可确保中文不乱码;如果fname不存在，则会创建fname文件
-        lines = f.readlines()
+    f = open(filepath, mode='r', encoding='utf-8')  # 'utf-8'可确保中文不乱码;如果fname不存在，则会创建fname文件
+    lines = f.readlines()
 
-    with open(filepath, mode='w', encoding='utf-8') as ff:  # 此处只能是 w，以 w 模式打开文件时，文件内容全被清空
-        for line in lines:
-            if line.startswith(prefix):
-                line = new_line
-            ff.write(line)
+    f = open(filepath, mode='w', encoding='utf-8')  # 此处只能是 w，以 w 模式打开文件时，文件内容全被清空
+    for line in lines:
+        if line.startswith(prefix):
+            line = new_line
+        f.write(line)
+    f.close()
     # ————————————————
     # 修改指定行的方法参考了
     # 原文链接：https://blog.csdn.net/qq_36072270/article/details/103496152
