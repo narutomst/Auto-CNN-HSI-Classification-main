@@ -50,7 +50,7 @@ args.manualSeed = random.randint(1, 10000)
 
 log_format = '%(asctime)s %(message)s'
 logging.basicConfig(stream=sys.stdout, level=logging.INFO,
-                    format=log_format, datefmt='%m/%d %I:%M:%S %p')
+                    format=log_format, datefmt='%Y-%m-%d %H:%M:%S')  # '%m/%d %I:%M:%S %p'
 fh = logging.FileHandler('./result/log_3D.txt')
 fh.setFormatter(logging.Formatter(log_format))
 logging.getLogger().addHandler(fh)
@@ -305,7 +305,7 @@ def cal_results(matrix):
     number = 0
     sum = 0
     # AA = np.zeros([shape[0]], dtype=np.float)
-    TPR: ndarray = np.zeros([shape[0]], dtype=np.float)
+    TPR: ndarray = np.zeros([shape[0]], dtype=float)
     for i in range(shape[0]):
         number += matrix[i, i]
         TPR[i] = matrix[i, i] / np.sum(matrix[i, :])
